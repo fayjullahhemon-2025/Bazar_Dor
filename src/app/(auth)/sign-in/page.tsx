@@ -53,7 +53,17 @@ export default function SignInPage() {
             setLoading(false);
         }
     };
-
+    const handleSocialSignIn = async (provider: "google" | "github") => {
+        try {
+            await authClient.signIn.social({
+                provider,
+                callbackURL: "/",
+            });
+        } catch (err) {
+            console.error(`${provider} sign up error:`, err);
+            toast.error(`${provider} দিয়ে সাইন আপ করা সম্ভব হয়নি।`);
+        }
+    };
 
 
     return (
@@ -164,7 +174,7 @@ export default function SignInPage() {
                 <div className="grid grid-cols-2 gap-3">
                     <button
                         type="button"
-                        // onClick={() => handleSocialSignIn("google")}
+                        onClick={() => handleSocialSignIn("google")}
                         className="flex items-center justify-center gap-2 py-2.5 px-2.5 rounded-xl border border-gray-200/90 hover:bg-gray-50 text-xs sm:text-sm font-semibold text-gray-700 transition-colors"
                     >
                         <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
@@ -190,7 +200,7 @@ export default function SignInPage() {
 
                     <button
                         type="button"
-                        // onClick={() => handleSocialSignIn("github")}
+                        onClick={() => handleSocialSignIn("github")}
                         className="flex items-center justify-center gap-2 py-2.5 px-2.5 rounded-xl border border-gray-200/90 hover:bg-gray-50 text-xs sm:text-sm font-semibold text-gray-700 transition-colors"
                     >
                         <svg
