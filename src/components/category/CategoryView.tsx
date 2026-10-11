@@ -42,7 +42,7 @@ export default function CategoryView({
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 md:py-8">
-      {/* 1. Category Header Card */}
+
       <div className="bg-white rounded-2xl p-6 border border-gray-100/90 shadow-xs flex items-center gap-4">
         <div className="w-14 h-14 rounded-full bg-[#f4f7f4] flex items-center justify-center text-3xl shrink-0">
           {isIconEmoji ? (
@@ -65,7 +65,7 @@ export default function CategoryView({
         </div>
       </div>
 
-      {/* 2. Filter / Sort Toolbar Card */}
+
       <div className="bg-white rounded-2xl px-6 py-3.5 border border-gray-100/90 shadow-xs flex items-center justify-end mt-4">
         <div className="flex items-center gap-3">
           <label htmlFor="sort-dropdown" className="text-sm font-medium text-gray-600">
@@ -93,14 +93,13 @@ export default function CategoryView({
         </div>
       </div>
 
-      {/* 3. Product Count Line */}
       <div className="mt-5 mb-4">
         <p className="text-xs sm:text-sm font-medium text-gray-600">
           মোট {toBengaliNumber(sortedProducts.length)}টি পণ্য দেখানো হচ্ছে
         </p>
       </div>
 
-      {/* 4. Products Grid */}
+
       {sortedProducts.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {sortedProducts.map((product) => (

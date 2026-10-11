@@ -21,3 +21,17 @@ export const formatUnit = (unit: string): string => {
   if (unitLower === "gram" || unitLower === "gm") return "প্রতি গ্রাম";
   return `প্রতি ${unit}`;
 };
+
+export const getUnitShortName = (unit: string): string => {
+  if (!unit) return "";
+  const unitLower = unit.toLowerCase();
+  if (unitLower === "kg") return "কেজি";
+  if (unitLower === "liter" || unitLower === "litre") return "লিটার";
+  if (unitLower === "piece" || unitLower === "pc") return "পিস";
+  if (unitLower === "hali") return "হালি";
+  if (unitLower === "dozen") return "ডজন";
+  if (unitLower === "gram" || unitLower === "gm") return "গ্রাম";
+  return unit;
+};
+
+

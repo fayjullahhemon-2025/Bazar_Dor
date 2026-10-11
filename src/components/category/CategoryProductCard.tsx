@@ -26,11 +26,11 @@ export default function CategoryProductCard({ product }: { product: Product }) {
   return (
     <Link href={`/product/${product.slug}`} className="block group">
       <div className="bg-white rounded-2xl p-5 border border-gray-100/90 shadow-xs hover:border-[#05893E]/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between h-full">
-        {/* Top Info */}
+
         <div className="flex items-start gap-3.5">
           <div className="w-11 h-11 rounded-full bg-[#f4f7f4] flex items-center justify-center text-xl shrink-0">
             {isImageEmoji ? (
-              <span className="leading-none">{product.image || product.categoryIcon || "🍚"}</span>
+              <span className="leading-none">{product.image || product.categoryIcon}</span>
             ) : (
               <img
                 src={product.image}
@@ -49,7 +49,6 @@ export default function CategoryProductCard({ product }: { product: Product }) {
           </div>
         </div>
 
-        {/* Bottom Info */}
         <div className="flex items-end justify-between mt-6">
           <div>
             <span className="text-xs text-gray-400 block mb-0.5">আজকের দাম</span>

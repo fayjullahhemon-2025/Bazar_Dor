@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function CategoryPage({ params }: PageProps) {
   const { slug } = await params;
 
-  // Fetch products and category list in parallel
+
   const [products, categories] = await Promise.all([
     getCategoryProducts(slug),
     getCategories(),

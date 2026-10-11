@@ -13,7 +13,7 @@ export interface Product {
   };
 }
 
-// Utility function to convert numbers to Bengali digits
+
 const toBengaliNumber = (num: number | string): string => {
   const englishToBengaliMap: { [key: string]: string } = {
     '0': '০', '1': '১', '2': '২', '3': '৩', '4': '৪',
@@ -69,7 +69,7 @@ export default function ProductCard({ product }: { product: Product }) {
             </span>
           </div>
 
-  
+
           <div
             className={`flex items-center gap-1 text-xs font-semibold px-2 py-1 rounded-md ${badgeStyles}`}
           >
