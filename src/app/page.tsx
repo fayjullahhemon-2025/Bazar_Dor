@@ -8,8 +8,8 @@ async function getProducts() {
 }
 export default async function Home() {
   const products = await getProducts();
-  const priceHikeProducts = products.filter((p: any) => p.change.dir === "up").sort((a,b)=>b?.change?.pct-a?.change?.pct).slice(0,6);
-  const priceDecreaseProducts = products.filter((p: any) => p.change.dir === "down").sort((a,b)=>a?.change?.pct-b?.change?.pct).slice(0,6);
+  const priceHikeProducts = products.filter((p: any) => p.change.dir === "up").sort((a:any,b:any)=>b?.change?.pct-a?.change?.pct).slice(0,6);
+  const priceDecreaseProducts = products.filter((p: any) => p.change.dir === "down").sort((a:any,b:any)=>a?.change?.pct-b?.change?.pct).slice(0,6);
   return (
     <div>
       <HeroSection></HeroSection>

@@ -5,6 +5,7 @@ import Header from "@/components/shared/Header";
 import Navlinks from "@/components/shared/Navlinks";
 import { Suspense } from "react";
 import Marquee from "@/components/shared/Marquee";
+import Footer from "@/components/shared/Footer";
 
 const HindSiliguri = Hind_Siliguri({
   subsets: ["latin", "bengali"],
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Marquee></Marquee>
         </Suspense>
         <div>{children}</div>
+        <Footer></Footer>
       </body>
     </html>
   );

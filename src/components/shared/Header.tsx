@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { Suspense } from 'react';
 import Logo from '@/assets/logo.png'
 import DateComponent from './Date';
@@ -18,7 +19,7 @@ export default function Header() {
     return (
         <header className="navbar px-4 md:px-12 py-3 flex justify-between items-center max-w-7xl mx-auto">
 
-            <div className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3 hover:opacity-95 transition-opacity">
                 <div className="w-12 h-12 flex justify-center items-center rounded-2xl bg-[#05893E]">
                     <Image
                         src={Logo}
@@ -37,7 +38,7 @@ export default function Header() {
                         </Suspense>
                     </div>
                 </div>
-            </div>
+            </Link>
 
 
             <div className="flex items-center gap-2">
