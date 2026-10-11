@@ -69,11 +69,15 @@ export default function SignUpPage() {
 
   const handleSocialSignUp = async (provider: "google" | "github") => {
     try {
-      await authClient.signIn.social({
+      const res = await authClient.signIn.social({
         provider,
         callbackURL: "/",
       });
-    } catch (err) {
+      if (res?.error) {
+        console.error(`${provider} sign up error:`, res.error);
+        toast.error(res.error.message || `${provider} দিয়ে সাইন আপ করা সম্ভব হয়নি।`);
+      }
+    } catch (err: unknown) {
       console.error(`${provider} sign up error:`, err);
       toast.error(`${provider} দিয়ে সাইন আপ করা সম্ভব হয়নি।`);
     }
