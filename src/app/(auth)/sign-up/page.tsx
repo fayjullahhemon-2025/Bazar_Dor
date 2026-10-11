@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { authClient, signUp } from "@/lib/auth-client";
+import { authClient, signUp, signOut } from "@/lib/auth-client";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -54,8 +54,10 @@ export default function SignUpPage() {
       if (error) {
         toast.error(error.message || "রেজিস্ট্রেশন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।");
       } else {
-        toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে! সাইন ইন পেজে নেওয়া হচ্ছে...");
+        await signOut();
+        toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে! অনুগ্রহ করে সাইন ইন করুন।");
         router.push("/sign-in");
+        router.refresh();
       }
     } catch (err: unknown) {
       console.error("Sign up error:", err);

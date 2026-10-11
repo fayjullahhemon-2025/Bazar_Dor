@@ -93,8 +93,8 @@ export default function Header() {
                         >
                             {user.image ? (
                                 <img
-                                    src={user.image}
-                                    alt={user.name || "User"}
+                                    src={user?.image}
+                                    alt={user?.name || "User"}
                                     className="w-9 h-9 rounded-full object-cover border border-gray-200"
                                 />
                             ) : (

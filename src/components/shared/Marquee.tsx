@@ -3,7 +3,9 @@ import "react-marquee-text/dist/styles.css";
 
 const getMarqueeTexts = async () => {
     try {
-        const res = await fetch('https://openapi.programming-hero.com/api/bazardor/products');
+        const res = await fetch('https://openapi.programming-hero.com/api/bazardor/products', {
+            next: { revalidate: 60 },
+        });
         if (!res.ok) {
             throw new Error('Http Error');
         }
@@ -59,13 +61,16 @@ export default async function Marquee() {
 
                         return (
                             <div key={item.id} className="flex items-center gap-1 whitespace-nowrap ">
-                             
+
                                 <span className="text-xl">{item.image}</span>
                                 <span className="font-semibold text-gray-800 text-sm md:text-base">
                                     {item.nameBn}
                                 </span>
                                 <span className="text-gray-700 text-sm md:text-base">
-                                    {toBengaliNumber(item.today)} টাকা/{item.unit === "kg" ? "কেজি" : item.unit}
+                                    {toBengaliNumber(item.today)} টাকা/{item.unit === "kg" ? "কেজি" :
+                                        item.unit === "litre" ? "লিটার" :
+                                            item.unit === "dozen" ? "ডজন" :
+                                                item.unit === "piece" ? "পিস" : item.unit}
                                 </span>
                                 <div className={`flex items-center gap-1 font-semibold text-sm ${isUp ? "text-red-600" : "text-green-600"}`}>
                                     <span>{isUp ? "▲" : "▼"}</span>
