@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       data-theme="light"
       className={`${HindSiliguri.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col bg-[#f2f6f3]">
         <Header></Header>
         <Suspense>
           <Navlinks></Navlinks>
