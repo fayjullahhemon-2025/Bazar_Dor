@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/shared/Header";
+import Navlinks from "@/components/shared/Navlinks";
+import { Suspense } from "react";
 // import Header from "@/components/shared/Header";
 
 const HindSiliguri = Hind_Siliguri({
@@ -25,6 +27,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <Header></Header>
+        <Suspense>
+          <Navlinks></Navlinks>
+        </Suspense>
         <div>{children}</div>
       </body>
     </html>

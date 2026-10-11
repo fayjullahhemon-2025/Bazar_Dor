@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React, { Suspense } from 'react';
 import Logo from '@/assets/logo.png'
 import DateComponent from './Date';
+import Navlinks from './Navlinks';
 export default function Header() {
 
     const auth_links =
@@ -15,7 +16,7 @@ export default function Header() {
         </>
 
     return (
-        <header className="navbar bg-base-100 shadow-sm px-4 md:px-12 py-3 flex justify-between items-center">
+        <header className="navbar px-4 md:px-12 py-3 flex justify-between items-center max-w-7xl mx-auto">
 
             <div className="flex items-center gap-3">
                 <div className="w-12 h-12 flex justify-center items-center rounded-2xl bg-[#05893E]">
@@ -42,6 +43,7 @@ export default function Header() {
             <div className="flex items-center gap-2">
                 {auth_links}
             </div>
+            
         </header>
     );
 }
