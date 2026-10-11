@@ -25,8 +25,8 @@ export default async function Navlinks() {
     const links: navType[] = await getLinks();
 
     return (
-        <div className="w-full border-b border-gray-200 py-3">
-            <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 sm:gap-4 flex-wrap px-4">
+        <div className=" border-b border-gray-200 pb-3 pl-10">
+            <div className=" flex items-center  gap-2 sm:gap-4 flex-wrap px-4">
                 {links.map((link) => (
                     <Link 
                         key={link.id} 
