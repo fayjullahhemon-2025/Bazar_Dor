@@ -228,7 +228,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                   {sortedMarkets.map((m, index) => (
                     <tr
                       key={`${m.market}-${index}`}
-                      className="border-b border-gray-800 last:border-b-0 hover:bg-[#fcfdfc] transition-colors"
+                      className={` ${index % 2 === 0 ? "bg-[#f2f6f3]" : "bg-[#fcfdfc]"} border-b border-gray-800 last:border-b-0 hover:bg-[#fcfdfc] transition-colors`}
                     >
                       <td className="py-3.5 px-4 text-sm font-bold text-gray-800 text-left">
                         {m.market}

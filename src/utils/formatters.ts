@@ -1,4 +1,4 @@
-// Utility functions for Bengali formatting
+
 
 export const toBengaliNumber = (num: number | string): string => {
   if (num === undefined || num === null) return "";

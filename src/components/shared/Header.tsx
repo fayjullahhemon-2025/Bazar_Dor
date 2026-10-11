@@ -8,12 +8,12 @@ export default function Header() {
 
     const auth_links =
         <>
-            <button className="btn btn-ghost text-gray-700 hover:bg-gray-100 font-medium">
+            <Link href="/sign-in" className="btn btn-ghost text-gray-700 hover:bg-gray-100 font-medium">
                 সাইন ইন
-            </button>
-            <button className="btn bg-[#05893E] hover:bg-[#046e32] text-white border-none rounded-lg px-6 shadow-sm">
+            </Link>
+            <Link href="/sign-up" className="btn bg-[#05893E] hover:bg-[#046e32] text-white border-none rounded-lg px-6 shadow-sm flex items-center justify-center">
                 সাইন আপ
-            </button>
+            </Link>
         </>
 
     return (
