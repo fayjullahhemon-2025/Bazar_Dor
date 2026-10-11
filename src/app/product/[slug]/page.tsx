@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import { Suspense } from "react";
 import { Product } from "@/types";
 import { toBengaliNumber } from "@/utils/formatters";
 import ProductDetailView from "@/components/product/ProductDetailView";
@@ -8,9 +9,10 @@ interface ProductPageProps {
   params: Promise<{ slug: string }>;
 }
 
+export const instant = false;
+
 async function getProductBySlug(slug: string): Promise<Product | null> {
   try {
-
     const res = await fetch(
       `https://openapi.programming-hero.com/api/bazardor/products?slug=${encodeURIComponent(slug)}`,
       { next: { revalidate: 60 } }
@@ -51,7 +53,7 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   };
 }
 
-export default async function ProductDetailPage({ params }: ProductPageProps) {
+async function ProductContent({ params }: ProductPageProps) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
 
@@ -80,4 +82,20 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   }
 
   return <ProductDetailView product={product} />;
+}
+
+export default function ProductDetailPage({ params }: ProductPageProps) {
+  return (
+    <Suspense
+      fallback={
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 md:py-8 animate-pulse">
+          <div className="h-4 w-40 bg-gray-200/80 rounded-lg mb-6" />
+          <div className="h-32 bg-white rounded-2xl border border-gray-100 mb-6" />
+          <div className="h-96 bg-white rounded-2xl border border-gray-100" />
+        </div>
+      }
+    >
+      <ProductContent params={params} />
+    </Suspense>
+  );
 }

@@ -1,10 +1,13 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 import CategoryView from "@/components/category/CategoryView";
 import { Product, Category } from "@/types";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
+
+export const instant = false;
 
 async function getCategoryProducts(slug: string): Promise<Product[]> {
   try {
@@ -40,6 +43,13 @@ async function getCategories(): Promise<Category[]> {
   }
 }
 
+export async function generateStaticParams() {
+  const categories = await getCategories();
+  return categories.map((cat) => ({
+    slug: cat.slug,
+  }));
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const categories = await getCategories();
@@ -54,9 +64,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function CategoryPage({ params }: PageProps) {
+async function CategoryContent({ params }: PageProps) {
   const { slug } = await params;
-
 
   const [products, categories] = await Promise.all([
     getCategoryProducts(slug),
@@ -74,5 +83,28 @@ export default async function CategoryPage({ params }: PageProps) {
       initialProducts={products}
       categorySlug={slug}
     />
+  );
+}
+
+export default function CategoryPage({ params }: PageProps) {
+  return (
+    <Suspense
+      fallback={
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 md:py-8">
+          <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-xs animate-pulse h-24 mb-4" />
+          <div className="bg-white rounded-2xl px-6 py-3.5 border border-gray-100 shadow-xs animate-pulse h-14 mb-4" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[1, 2, 3, 4, 5, 6].map((i) => (
+              <div
+                key={i}
+                className="bg-white rounded-2xl p-5 border border-gray-100 shadow-xs h-36 animate-pulse"
+              />
+            ))}
+          </div>
+        </div>
+      }
+    >
+      <CategoryContent params={params} />
+    </Suspense>
   );
 }
