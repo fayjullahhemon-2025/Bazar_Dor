@@ -22,7 +22,7 @@ export default function ProfilePage() {
 
     useEffect(() => {
         if (!isPending && !session?.user) {
-            router.push("/sign-in?redirected=true&callbackUrl=/profile");
+            router.push(`/sign-in?redirected=true&callbackUrl=/profile&t=${Date.now()}`);
         }
     }, [isPending, session, router]);
 

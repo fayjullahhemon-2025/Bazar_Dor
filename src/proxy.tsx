@@ -11,6 +11,7 @@ export async function proxy(request: NextRequest) {
         const signInUrl = new URL("/sign-in", request.url);
         signInUrl.searchParams.set("redirected", "true");
         signInUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
+        signInUrl.searchParams.set("t", Date.now().toString());
         return NextResponse.redirect(signInUrl);
     }
 

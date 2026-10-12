@@ -24,7 +24,7 @@ export default function CategoryProductCard({ product }: { product: Product }) {
   const isImageEmoji = !product.image?.startsWith("http") && !product.image?.startsWith("/");
 
   return (
-    <Link href={`/product/${product.slug}`} className="block group">
+    <Link href={`/product/${product.slug}`} prefetch={false} className="block group">
       <div className="bg-white rounded-2xl p-5 border border-gray-100/90 shadow-xs hover:border-[#05893E]/30 hover:shadow-md transition-all duration-200 flex flex-col justify-between h-full">
 
         <div className="flex items-start gap-3.5">

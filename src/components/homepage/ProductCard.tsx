@@ -43,7 +43,7 @@ export default function ProductCard({ product }: { product: Product }) {
   }
 
   return (
-    <Link href={`/product/${product.slug}`} className="block">
+    <Link href={`/product/${product.slug}`} prefetch={false} className="block">
       <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100 hover:border-[#05893E] transition-all duration-200 flex flex-col justify-between h-full">
 
         <div className="flex items-start gap-3">

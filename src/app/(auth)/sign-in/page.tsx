@@ -9,7 +9,8 @@ import { authClient, signIn } from "@/lib/auth-client";
 function SignInForm() {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const toastShownRef = useRef(false);
+    const lastToastParamRef = useRef<string>("");
+    const lastToastTimeRef = useRef<number>(0);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -23,12 +24,20 @@ function SignInForm() {
             Boolean(searchParams.get("redirect")) ||
             Boolean(searchParams.get("from"));
 
-        if (isRedirected && !toastShownRef.current) {
-            toastShownRef.current = true;
-            toast.warning("এই পেজে প্রবেশ করতে অনুগ্রহ করে প্রথমে সাইন ইন করুন।", {
-                toastId: "protected-route-redirect",
-            });
+        if (!isRedirected) return;
+
+        const currentParam = searchParams.toString();
+        const now = Date.now();
+
+        // Prevent duplicate execution from immediate React strict-mode double-mounting
+        if (lastToastParamRef.current === currentParam && now - lastToastTimeRef.current < 200) {
+            return;
         }
+
+        lastToastParamRef.current = currentParam;
+        lastToastTimeRef.current = now;
+
+        toast.warning("এই পেজে প্রবেশ করতে অনুগ্রহ করে প্রথমে সাইন ইন করুন।");
     }, [searchParams]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
