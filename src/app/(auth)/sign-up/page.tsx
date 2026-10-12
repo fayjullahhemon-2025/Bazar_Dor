@@ -1,19 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { authClient, signUp, signOut } from "@/lib/auth-client";
+import { authClient, signUp, signOut, useSession } from "@/lib/auth-client";
 
 export default function SignUpPage() {
   const router = useRouter();
+  const { data: session, isPending } = useSession();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!isPending && session?.user) {
+      router.replace(`/?already_logged_in=true&t=${Date.now()}`);
+    }
+  }, [isPending, session, router]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

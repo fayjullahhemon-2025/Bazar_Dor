@@ -5,9 +5,25 @@ import { auth } from "@/lib/auth";
 export async function proxy(request: NextRequest) {
     const session = await auth.api.getSession({
         headers: await headers()
-    })
+    });
 
-    if (!session) {
+    const pathname = request.nextUrl.pathname;
+    const isAuthRoute =
+        pathname === "/sign-in" ||
+        pathname.startsWith("/sign-in/") ||
+        pathname === "/sign-up" ||
+        pathname.startsWith("/sign-up/");
+
+    // If user is logged in, they cannot access sign-in or sign-up; redirect to homepage
+    if (session && isAuthRoute) {
+        const homeUrl = new URL("/", request.url);
+        homeUrl.searchParams.set("already_logged_in", "true");
+        homeUrl.searchParams.set("t", Date.now().toString());
+        return NextResponse.redirect(homeUrl);
+    }
+
+    // If user is not logged in, protected routes redirect to sign-in
+    if (!session && !isAuthRoute) {
         const signInUrl = new URL("/sign-in", request.url);
         signInUrl.searchParams.set("redirected", "true");
         signInUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
@@ -19,5 +35,12 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/product/:path*", "/profile"], // Specify the routes the middleware applies to
+    matcher: [
+        "/product/:path*",
+        "/profile",
+        "/sign-in",
+        "/sign-in/:path*",
+        "/sign-up",
+        "/sign-up/:path*",
+    ],
 };
