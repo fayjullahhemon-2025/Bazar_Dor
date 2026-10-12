@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       data-theme="light"
-      className={`${HindSiliguri.className} h-full antialiased`}
+      className={`${HindSiliguri.className} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col bg-[#f2f6f3]">
         <ToastProvider />

@@ -10,8 +10,8 @@ async function getProducts() {
 }
 export default async function Home() {
   const products = await getProducts();
-  const priceHikeProducts = products.filter((p: any) => p.change.dir === "up").sort((a:any,b:any)=>b?.change?.pct-a?.change?.pct).slice(0,6);
-  const priceDecreaseProducts = products.filter((p: any) => p.change.dir === "down").sort((a:any,b:any)=>a?.change?.pct-b?.change?.pct).slice(0,6);
+  const priceHikeProducts = products.filter((p: any) => p.change.dir === "up").sort((a: any, b: any) => b?.change?.pct - a?.change?.pct).slice(0, 6);
+  const priceDecreaseProducts = products.filter((p: any) => p.change.dir === "down").sort((a: any, b: any) => a?.change?.pct - b?.change?.pct).slice(0, 6);
   return (
     <div>
       <HeroSection></HeroSection>
@@ -29,9 +29,10 @@ export default async function Home() {
       />
 
       <ProductSection
+        id="সব-পণ্য"
         title="সব পণ্য"
         subtitle="সবটি পণ্যের বাজার দর তালিকা"
-        total= {products.length}
+        total={products.length}
         products={products}
       />
     </div>
