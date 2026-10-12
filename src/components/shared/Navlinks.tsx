@@ -25,4 +25,4 @@ export default async function Navlinks() {
       </div>
     </nav>
   );
-}
+}

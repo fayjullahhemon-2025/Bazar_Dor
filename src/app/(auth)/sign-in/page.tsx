@@ -1,17 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 import { authClient, signIn } from "@/lib/auth-client";
 
-export default function SignInPage() {
+function SignInForm() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const toastShownRef = useRef(false);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        const isRedirected =
+            searchParams.get("redirected") === "true" ||
+            Boolean(searchParams.get("redirectReason")) ||
+            Boolean(searchParams.get("callbackUrl")) ||
+            Boolean(searchParams.get("redirect")) ||
+            Boolean(searchParams.get("from"));
+
+        if (isRedirected && !toastShownRef.current) {
+            toastShownRef.current = true;
+            toast.warning("এই পেজে প্রবেশ করতে অনুগ্রহ করে প্রথমে সাইন ইন করুন।", {
+                toastId: "protected-route-redirect",
+            });
+        }
+    }, [searchParams]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -31,10 +49,11 @@ export default function SignInPage() {
         setLoading(true);
 
         try {
+            const callbackUrl = searchParams.get("callbackUrl") || "/";
             const { data, error } = await signIn.email({
                 email: trimmedEmail,
                 password,
-                callbackURL: "/",
+                callbackURL: callbackUrl,
             });
 
             if (error) {
@@ -43,7 +62,7 @@ export default function SignInPage() {
                 );
             } else {
                 toast.success("সফলভাবে সাইন ইন হয়েছে!");
-                router.push("/");
+                router.push(callbackUrl);
                 router.refresh();
             }
         } catch (err: unknown) {
@@ -55,9 +74,10 @@ export default function SignInPage() {
     };
     const handleSocialSignIn = async (provider: "google" | "github") => {
         try {
+            const callbackUrl = searchParams.get("callbackUrl") || "/";
             const res = await authClient.signIn.social({
                 provider,
-                callbackURL: "/",
+                callbackURL: callbackUrl,
             });
             if (res?.error) {
                 console.error(`${provider} sign in error:`, res.error);
@@ -245,5 +265,17 @@ export default function SignInPage() {
                 </Link>
             </div>
         </div>
+    );
+}
+
+export default function SignInPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-[calc(100vh-140px)] flex justify-center items-center">
+                <div className="w-8 h-8 border-4 border-[#05893E] border-t-transparent rounded-full animate-spin" />
+            </div>
+        }>
+            <SignInForm />
+        </Suspense>
     );
 }
