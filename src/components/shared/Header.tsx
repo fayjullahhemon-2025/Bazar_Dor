@@ -106,13 +106,13 @@ export default function Header() {
                             <span className="text-sm font-semibold text-gray-800">
                                 {displayName}
                             </span>
-                            <span className="text-gray-400 text-xs select-none">▾</span>
+                            <span className="text-gray-400 text-xl select-none">▾</span>
                         </button>
 
                         {/* Dropdown Menu */}
                         {dropdownOpen && (
                             <div className="absolute right-0 mt-2 w-60 bg-white rounded-2xl p-4 shadow-xl border border-gray-100/90 z-50 animate-in fade-in zoom-in-95 duration-100">
-                                {/* User Info Header */}
+
                                 <div className="mb-3">
                                     <h4 className="text-sm font-bold text-gray-900 leading-snug truncate">
                                         {user.name || 'ইউজার'}
@@ -124,7 +124,7 @@ export default function Header() {
 
                                 <div className="border-t border-gray-100 my-2.5" />
 
-                                {/* Menu Links */}
+
                                 <div className="space-y-1">
                                     <Link
                                         href="/profile"
