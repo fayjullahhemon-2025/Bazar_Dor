@@ -90,18 +90,29 @@ function SignInForm() {
     };
     const handleSocialSignIn = async (provider: "google" | "github") => {
         try {
+            if (typeof window !== "undefined") {
+                sessionStorage.setItem("social_login_pending", "true");
+            }
             const callbackUrl = searchParams.get("callbackUrl") || "/";
+            const separator = callbackUrl.includes("?") ? "&" : "?";
+            const finalCallbackUrl = `${callbackUrl}${separator}auth_success=true`;
             const res = await authClient.signIn.social({
                 provider,
-                callbackURL: callbackUrl,
+                callbackURL: finalCallbackUrl,
             });
             if (res?.error) {
+                if (typeof window !== "undefined") {
+                    sessionStorage.removeItem("social_login_pending");
+                }
                 console.error(`${provider} sign in error:`, res.error);
                 toast.error(res.error.message || `${provider} দিয়ে সাইন ইন করা সম্ভব হয়নি।`);
             }
         } catch (err: unknown) {
-            console.error(`${provider} sign up error:`, err);
-            toast.error(`${provider} দিয়ে সাইন আপ করা সম্ভব হয়নি।`);
+            if (typeof window !== "undefined") {
+                sessionStorage.removeItem("social_login_pending");
+            }
+            console.error(`${provider} sign in error:`, err);
+            toast.error(`${provider} দিয়ে সাইন ইন করা সম্ভব হয়নি।`);
         }
     };
 
