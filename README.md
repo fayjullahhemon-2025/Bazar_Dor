@@ -1,36 +1,178 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 বাজার দর (BazarDor)
 
-## Getting Started
+[![Next.js](https://img.shields.io/badge/Next.js-16.4-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![DaisyUI](https://img.shields.io/badge/DaisyUI-v5-5A0EF8?style=for-the-badge&logo=daisyui)](https://daisyui.com/)
+[![Better Auth](https://img.shields.io/badge/Better_Auth-1.7-black?style=for-the-badge)](https://better-auth.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb)](https://www.mongodb.com/)
 
-First, run the development server:
+> **আজকের নিত্যপ্রয়োজনীয় পণ্যের বাজার দর, বাজারভিত্তিক তুলনা এবং দামের হ্রাস-বৃদ্ধির সার্বক্ষণিক তথ্য এক নজরে।**  
+> *A modern, localized grocery and commodity market price monitoring web application for Bangladesh.*
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 📌 সূচিপত্র (Table of Contents)
+- [সংক্ষিপ্ত বিবরণ (Overview)](#-সংক্ষিপ্ত-বিবরণ-overview)
+- [প্রধান ৫টি বৈশিষ্ট্য (5 Key Features)](#-প্রধান-৫টি-বৈশিষ্ট্য-5-key-features)
+- [ব্যবহৃত প্রযুক্তিসমূহ (Technologies Used)](#-ব্যবহৃত-প্রযুক্তিসমূহ-technologies-used)
+- [প্রজেক্ট সেটআপ ও রান করার নিয়ম (Getting Started)](#-প্রজেক্ট-সেটআপ-ও-রান-করার-নিয়ম-getting-started)
+- [এনভায়রনমেন্ট ভেরিয়েবল (Environment Variables)](#-এনভায়রনমেন্ট-ভেরিয়েবল-environment-variables)
+- [ফোল্ডার স্ট্রাকচার (Project Structure)](#-ফোল্ডার-স্ট্রাকচার-project-structure)
+- [সম্পূর্ণ ফিচারের তালিকা (Completed Features Checklist)](#-সম্পূর্ণ-ফিচারের-তালিকা-completed-features-checklist)
+- [লাইভ ডেমো ও লিংক (Links)](#-লাইভ-ডেমো-ও-লিংক-links)
+
+---
+
+## 📖 সংক্ষিপ্ত বিবরণ (Overview)
+
+**বাজার দর (BazarDor)** হলো একটি আধুনিক ফুল-স্ট্যাক ওয়েব অ্যাপ্লিকেশন, যার মাধ্যমে ব্যবহারকারীরা সহজেই চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলাসহ নিত্যপ্রয়োজনীয় পণ্যের আজকের বাজার দর দেখতে পারেন। অ্যাপ্লিকেশনটিতে রয়েছে বাজারভিত্তিক সর্বনিম্ন, সর্বোচ্চ ও গড় মূল্যের বিশদ বিশ্লেষণ, লাইভ প্রাইস ট্র্যাকার মার্কা, ক্যাটাগরি ফিল্টারিং, স্মার্ট সর্টিং এবং সুরক্ষিত প্রোফাইল ও পণ্য বিবরণী সুবিধা। সম্পূর্ণ প্ল্যাটফর্মটি খাঁটি বাংলা সংখ্যা ও ফন্ট রূপান্তরের মাধ্যমে স্থানীয় ব্যবহারকারীদের উপযোগী করে তৈরি করা হয়েছে।
+
+---
+
+## ✨ প্রধান ৫টি বৈশিষ্ট্য (5 Key Features)
+
+### ১. 📊 রিয়েল-টাইম পণ্য ও বাজার দর ট্র্যাকিং (Live Market Dashboard & Ticker)
+- **লাইভ বাংলা তারিখ ও প্রাইস টিকার:** হোম পেজের শীর্ষে চলমান বাংলা তারিখ এবং ইনফিনিট স্ক্রলিং মার্কা স্ট্রিপ (`react-marquee-text`), যা পণ্যের আজকের দর ও শতকরা পরিবর্তন সরাসরি প্রদর্শন করে।
+- **স্বয়ংক্রিয় সেগমেন্টেশন:** আজকের বাজারে কোন পণ্যের দর বাড়ল বা কমল তা এক নজরে দেখার জন্য **“আজ দাম বেড়েছে ▲”** এবং **“আজ দাম কমেছে ▼”** সেকশন।
+- **সম্পূর্ণ ক্যাটালগ ও স্মুথ স্ক্রলিং:** **“সব পণ্য”** সেকশনে মোট পণ্যের বাংলা সংখ্যায় হিসাবসহ বিস্তারিত গ্রিড। হিরো সেকশনের প্রাইমারি CTA বোতামে ক্লিক করলে কোনো রুট পরিবর্তন ছাড়াই সরাসরি `#সব-পণ্য` সেকশনে স্মুথ স্ক্রল হয়।
+
+### ২. 🔍 স্মার্ট ক্যাটাগরি ফিল্টারিং ও ডাইনামিক সর্টিং (Category & Dynamic Sort)
+- **ক্যাটাগরি নেভিগেশন বার:** প্রতিটি ক্যাটাগরির নিজস্ব আইকনসহ ডায়নামিক ক্যাটাগরি বার এবং অ্যাক্টিভ লিঙ্ক হাইলাইটিং।
+- **নিউমেরিক সর্টিং ইঞ্জিন:** ক্যাটাগরি পেজে পণ্যের দাম ও ওঠানামা অনুযায়ী সাজানোর জন্য আধুনিক ড্রপডাউন:
+  - *ডিফল্ট (Default)*
+  - *দাম: কম থেকে বেশি (Price: Low to High)*
+  - *দাম: বেশি থেকে কম (Price: High to Low)*
+
+### ৩. 📈 বাজারভিত্তিক তুলনামূলক বিশ্লেষণ 
+- **মূল্য পরিসংখ্যান সামারি:** নির্বাচিত পণ্যের আজকের দর, সর্বনিম্ন দর, সর্বোচ্চ দর এবং গড় দরের সমন্বিত ড্যাশবোর্ড।
+- **বাজারের তুলনামূলক তালিকা:** কারওয়ান বাজার, নিউ মার্কেট, মিরপুর ১ সহ বিভিন্ন কাঁচাবাজারের বিস্তারিত দরের তালিকা।
+- **৪০৪ হ্যান্ডলিং:** কোনো পণ্যের তথ্য না থাকলে স্বয়ংক্রিয়ভাবে কাস্টম `not-found.tsx` পেজে নিয়ে যায়।
+
+### ৪. 🛡️ NEXT JS প্রক্সি ও প্রোটেক্টেড রুট টোস্ট নোটিফিকেশন (`proxy.tsx`)
+- **সার্ভার-সাইড প্রক্সি সিকিউরিটি:** Next.js 16-এর নতুন `proxy.tsx` কনভেনশন ব্যবহার করে পণ্যের বিস্তারিত পেজ (`/product/:path*`) এবং প্রোফাইল পেজ (`/profile`) সুরক্ষিত রাখা হয়েছে।
+- **রিলেভ্যান্ট টোস্ট অ্যালার্ট:** অননুমোদিত (লগইন ছাড়া) ব্যবহারকারী কোনো সুরক্ষিত পেজে প্রবেশের চেষ্টা করলেই স্বয়ংক্রিয়ভাবে `/sign-in`-এ রিডাইরেক্ট হয় এবং তাৎক্ষণিকভাবে `react-toastify`-এর মাধ্যমে সতর্কবার্তা প্রদর্শিত হয়: *“এই পেজে প্রবেশ করতে অনুগ্রহ করে প্রথমে সাইন ইন করুন।”*
+- **স্মার্ট রিটার্ন মেকানিজম:** লগইন সম্পন্ন হওয়ার পর স্বয়ংক্রিয়ভাবে ব্যবহারকারীকে তার পূর্বে অনুরোধকৃত মূল পেজে (`callbackUrl`) ফিরিয়ে নেওয়া হয়।
+
+### ৫. 🔐 বেটার-অথ অথেন্টিকেশন ও ব্যবহারকারী প্রোফাইল  (Authentication & Profile)
+- **মাল্টিপল সাইন-ইন মেথড:** ইমেইল/পাসওয়ার্ড রেজিস্ট্রেশন ও লগইনের পাশাপাশি Google এবং GitHub সোশ্যাল লগইন সমর্থন।
+- **প্রোফাইল ও লাইভ আপডেট:** ব্যবহারকারীর অ্যাকাউন্টের তথ্য দেখা এবং প্রোফাইল থেকে নিজের নাম পরিবর্তনের সুবিধা (`updateUser` API)।
+- **নেভবার ড্রপডাউন মেনু:** লগইন থাকলে ব্যবহারকারীর নাম, ইমেইল, এভাটার এবং সাইন আউট বাটনসহ ইন্টারঅ্যাক্টিভ ড্রপডাউন মেনু।
+
+---
+
+## 🛠️ ব্যবহৃত প্রযুক্তিসমূহ (Technologies Used)
+
+| প্রযুক্তি | সংস্করণ | ব্যবহারের ক্ষেত্র |
+| :--- | :--- | :--- |
+| **Next.js** | 16.4.0 (App Router, Turbopack) | কোর ফ্রেমওয়ার্ক, সার্ভার কম্পোনেন্টস ও রাউটিং |
+| **TypeScript** | 5.x | টাইপ সেফটি ও নির্ভরযোগ্য কোডবেস |
+| **Tailwind CSS** | 4.x | আধুনিক ইউটিলিটি-ফার্স্ট সিএসএস স্টাইলিং |
+| **DaisyUI** | 5.7.x | প্রি-বিল্ট রেসপনসিভ ইউআই কম্পোনেন্টস |
+| **Better Auth** | 1.7.x | সুরক্ষিত ক্রেডেনশিয়াল ও সোশ্যাল অথেনটিকেশন |
+| **MongoDB Driver** | 7.7.x | ব্যবহারকারীর সেশন ও অ্যাকাউন্ট ডেটাবেস |
+| **React Toastify** | 11.1.x | ব্যবহারকারী ফিডব্যাক ও নোটিফিকেশন সিস্টেম |
+| **React Marquee Text** | 1.0.6 | লাইভ ইনফিনিট প্রাইস টিকার অ্যানিমেশন |
+| **Google Fonts (Hind Siliguri)** | - | নান্দনিক বাংলা টাইপোগ্রাফি |
+
+---
+
+## 📂 ফোল্ডার স্ট্রাকচার (Project Structure)
+
+```text
+bazar-dor/
+├── public/                 # স্ট্যাটিক অ্যাসেট ও পাবলিক ফাইলসমূহ
+├── src/
+│   ├── app/                # Next.js 16 App Router পেজ ও লেআউট
+│   │   ├── (auth)/         # সাইন-ইন ও সাইন-আপ রুট গ্রুপ
+│   │   │   ├── sign-in/    # সাইন-ইন পেজ (সোশ্যাল ও ইমেইল অথ)
+│   │   │   └── sign-up/    # সাইন-আপ ও রেজিস্ট্রেশন পেজ
+│   │   ├── category/[slug] # ক্যাটাগরিভিত্তিক ডায়নামিক পণ্য তালিকা পেজ
+│   │   ├── product/[slug]  # পণ্যের বাজারভিত্তিক বিস্তারিত ও তুলনামূলক পেজ
+│   │   ├── profile/        # প্রোটেক্টেড ইউজার প্রোফাইল ও আপডেট পেজ
+│   │   ├── not-found.tsx   # বিশ্বজনীন ৪০৪ নট-ফাউন্ড পেজ
+│   │   ├── layout.tsx      # রুট লেআউট (ফন্ট, টোস্ট, হেডার, ফুটার)
+│   │   └── page.tsx        # মূল হোম পেজ (হিরো, দর বৃদ্ধি/হ্রাস, সব পণ্য)
+│   ├── assets/             # লোগো ও হিরো ইলাস্ট্রেশন ইমেজ
+│   ├── components/         # পুনঃব্যবহারযোগ্য কম্পোনেন্টসমূহ
+│   │   ├── category/       # ক্যাটাগরি ভিউ ও ক্যাটাগরি কার্ড
+│   │   ├── homepage/       # হিরো সেকশন, প্রোডাক্ট কার্ড ও সেকশন
+│   │   ├── product/        # প্রোডাক্ট ডিটেইল ভিউ ও বাজার তুলনা টেবিল
+│   │   └── shared/         # হেডার, ফুটার, মার্কার, নেভবার, টোস্ট
+│   ├── lib/                # অথেনটিকেশন কনফিগ (Better Auth ও ক্লায়েন্ট)
+│   ├── proxy.tsx           # সার্ভার-সাইড রাউট গার্ড ও রিডাইরেক্ট প্রক্সি
+│   ├── types/              # টাইপস্ক্রিপ্ট টাইপ ডেফিনিশন
+│   └── utils/              # বাংলা সংখ্যা ও ইউনিট ফরম্যাটিং ইউটিলিটি
+├── package.json            # ডিপেনডেন্সি ও স্ক্রিপ্টসমূহ
+└── tsconfig.json           # টাইপস্ক্রিপ্ট কনফিগারেশন
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚙️ প্রজেক্ট সেটআপ ও রান করার নিয়ম (Getting Started)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### ১. রিপোজিটরি ক্লোন করুন
+```bash
+git clone https://github.com/fayjullahhemon-2025/Bazar_Dor.git
+cd Bazar_Dor
+```
 
-## Learn More
+### ২. ডিপেনডেন্সি ইন্সটল করুন
+```bash
+npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### ৩. এনভায়রনমেন্ট ভেরিয়েবল কনফিগার করুন
+প্রজেক্টের রুট ডিরেক্টরিতে একটি `.env` ফাইল তৈরি করুন এবং নিচের মানগুলো যোগ করুন:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+# MongoDB Connection String
+MONGODB_URI="mongodb+srv://<username>:<password>@cluster.mongodb.net/bazar_dor?retryWrites=true&w=majority"
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Better Auth Configuration
+BETTER_AUTH_SECRET="your-super-secret-key-at-least-32-chars"
+BETTER_AUTH_URL="http://localhost:3000"
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
 
-## Deploy on Vercel
+# Optional: Social Authentication
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+GITHUB_CLIENT_ID="your-github-client-id"
+GITHUB_CLIENT_SECRET="your-github-client-secret"
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### ৪. ডেভেলপমেন্ট সার্ভার চালু করুন
+```bash
+npm run dev
+```
+ব্রাউজারে [http://localhost:3000](http://localhost:3000) ওপেন করে প্রজেক্টটি ব্রাউজ করুন।
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## ✅ সম্পূর্ণ ফিচারের তালিকা (Completed Features Checklist)
+
+- [x] **হিরো সেকশন ও স্মুথ অ্যাঙ্কর লিঙ্ক:** হিরো সেকশনের "সব পণ্য দেখুন" বোতাম পেজ রিলোড বা রুট চেঞ্জ ছাড়া `#সব-পণ্য` সেকশনে স্ক্রল করে।
+- [x] **লাইভ প্রাইস মার্কা:** হেডার নিচে অটোমেটিক ইনফিনিট স্ক্রলিং টিকার।
+- [x] **দর বৃদ্ধি ও হ্রাসের সেকশন:** “আজ দাম বেড়েছে ▲” এবং “আজ দাম কমেছে ▼” শীর্ষ পণ্যের কার্ড গ্রিড।
+- [x] **সব পণ্য সেকশন:** মোট পণ্যের বাংলা হিসাব ও সম্পূর্ণ তালিকা।
+- [x] **ক্যাটাগরি সর্টিং ও ফিল্টারিং:** ড্রপডাউন দিয়ে দামের ক্রমানুসারে নিখুঁত নিউমেরিক সর্টিং।
+- [x] **প্রোটেক্টেড প্রোডাক্ট ডিটেইলস পেজ:** লগইন ছাড়া ঢুকতে গেলে প্রক্সি স্বয়ংক্রিয়ভাবে সাইন-ইন পেজে রিডাইরেক্ট করে।
+- [x] **রিডাইরেক্ট টোস্ট নোটিফিকেশন:** প্রতিবার ক্লিকে রিডাইরেক্ট হলে `react-toastify`-এর মাধ্যমে সতর্কতা প্রদর্শন।
+- [x] **বাজারভিত্তিক তুলনা টেবিল:** সর্বনিম্ন, সর্বোচ্চ ও গড় দরসহ বাজারের টেবিল।
+- [x] **কাস্টম ৪০৪ ও এম্পটি স্টেট:** ভুল স্লাগ বা খালি ক্যাটাগরির জন্য কাস্টম ৪০৪ ডিজাইন ও “হোম পেজে ফিরে যান” অ্যাকশন বোতাম।
+- [x] **বেটার-অথ :** ইমেইল/পাসওয়ার্ড ও গুগল/গিটহাব সোশ্যাল লগইন সমর্থন।
+- [x] **প্রোফাইল আপডেট ফিচার:** ব্যবহারকারীর প্রোফাইল থেকে নিজের নাম সম্পাদনা ও রিয়েল-টাইম সেশন আপডেট।
+- [x] **রেসপনসিভ ডিজাইন:** মোবাইল, ট্যাবলেট এবং ডেস্কটপ সব ডিভাইসে সম্পূর্ণ অপ্টিমাইজড ভিউ।
+
+---
+
+## 🔗 লাইভ ডেমো ও লিংক (Links)
+
+- **Live Deployment:** [বাজার দর লাইভ সাইট](https://bazar-dor-mu-ten.vercel.app/) 
+- **GitHub Repository:** [fayjullahhemon-2025/Bazar_Dor](https://github.com/fayjullahhemon-2025/Bazar_Dor)
+
+---
+
+<div align="center">
+  <sub>Developed By Fayjullah Haque Emon</sub>
+</div>
