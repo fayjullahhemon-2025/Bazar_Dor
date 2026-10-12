@@ -16,13 +16,13 @@ export default async function Home() {
     <div>
       <HeroSection></HeroSection>
       <ProductSection
-        title="সবচেয়ে দাম বেড়েছে"
+        title="আজ দাম বেড়েছে"
         icon="▲"
         iconColor="text-red-500"
         products={priceHikeProducts}
       />
       <ProductSection
-        title="সবচেয়ে দাম কমেছে"
+        title="আজ দাম কমেছে"
         icon="▼"
         iconColor="text-emerald-500"
         products={priceDecreaseProducts}
