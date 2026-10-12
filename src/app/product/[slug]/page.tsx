@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { Product } from "@/types";
@@ -58,27 +58,7 @@ async function ProductContent({ params }: ProductPageProps) {
   const product = await getProductBySlug(slug);
 
   if (!product) {
-    return (
-      <div className="max-w-4xl mx-auto px-4 py-16 text-center">
-        <div className="bg-white rounded-2xl p-10 border border-gray-100 shadow-xs">
-          <div className="w-16 h-16 rounded-full bg-gray-50 flex items-center justify-center text-3xl mx-auto mb-4">
-            🛒
-          </div>
-          <h2 className="text-xl font-bold text-gray-800 mb-2">
-            পণ্যটি খুঁজে পাওয়া যায়নি
-          </h2>
-          <p className="text-sm text-gray-500 mb-6">
-            দুঃখিত, আপনি যে পণ্যটি খুঁজছেন তা এই মুহূর্তে উপলব্ধ নেই।
-          </p>
-          <Link
-            href="/"
-            className="inline-block px-5 py-2.5 bg-[#05893E] text-white rounded-xl font-medium hover:bg-[#046e32] transition-colors"
-          >
-            হোমে ফিরে যান
-          </Link>
-        </div>
-      </div>
-    );
+    notFound();
   }
 
   return <ProductDetailView product={product} />;

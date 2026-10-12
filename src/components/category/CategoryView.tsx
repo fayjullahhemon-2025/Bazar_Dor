@@ -6,6 +6,8 @@ import { Product } from "@/types";
 import { toBengaliNumber } from "@/utils/formatters";
 import CategoryProductCard from "./CategoryProductCard";
 
+import NotFound from "@/app/not-found";
+
 interface CategoryViewProps {
   categoryName: string;
   categoryIcon: string;
@@ -39,6 +41,34 @@ export default function CategoryView({
   }, [initialProducts, sortBy]);
 
   const isIconEmoji = !categoryIcon?.startsWith("http") && !categoryIcon?.startsWith("/");
+
+  if (initialProducts.length === 0) {
+    return (
+      // <div className="min-h-[calc(100vh-280px)] flex flex-col justify-center items-center px-4 py-12 sm:py-16">
+      //   <div className="w-full max-w-lg bg-white rounded-3xl p-8 sm:p-12 border border-gray-100 shadow-sm text-center">
+      //     <div className="w-20 h-20 rounded-3xl bg-[#05893E]/10 text-[#05893E] flex items-center justify-center text-3xl font-black mx-auto mb-6">
+      //       ৪০৪
+      //     </div>
+      //     <span className="inline-block px-3 py-1 rounded-full text-xs font-bold bg-red-50 text-red-600 mb-3">
+      //       ৪০৪ ত্রুটি (404 Error)
+      //     </span>
+      //     <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight mb-2">
+      //       এই ক্যাটাগরিতে কোনো পণ্য পাওয়া যায়নি
+      //     </h2>
+      //     <p className="text-sm text-gray-500 mb-8 max-w-sm mx-auto leading-relaxed">
+      //       দুঃখিত, এই ক্যাটাগরিতে বর্তমানে কোনো পণ্য নেই অথবা ক্যাটাগরির ঠিকানাটি ভুল হতে পারে।
+      //     </p>
+      //     <Link
+      //       href="/"
+      //       className="w-full sm:w-auto px-6 py-3 bg-[#05893E] hover:bg-[#046e32] active:bg-[#035a28] text-white font-bold rounded-xl text-sm shadow-xs transition-colors inline-flex items-center justify-center gap-2"
+      //     >
+      //       হোম পেজে ফিরে যান
+      //     </Link>
+      //   </div>
+      // </div>
+      NotFound()
+    );
+  }
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 md:py-8">
@@ -81,8 +111,8 @@ export default function CategoryView({
               <option value="default">ডিফল্ট</option>
               <option value="price-asc">দাম: কম থেকে বেশি</option>
               <option value="price-desc">দাম: বেশি থেকে কম</option>
-              <option value="change-desc">পরিবর্তন: সবচেয়ে বৃদ্ধি</option>
-              <option value="change-asc">পরিবর্তন: সবচেয়ে হ্রাস</option>
+              {/* <option value="change-desc">পরিবর্তন: সবচেয়ে বৃদ্ধি</option>
+              <option value="change-asc">পরিবর্তন: সবচেয়ে হ্রাস</option> */}
             </select>
             <span className="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -40,15 +40,10 @@ export default function NotFound() {
                 d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
               />
             </svg>
-            <span>হোমে ফিরে যান</span>
+            <span>হোম পেজে ফিরে যান</span>
           </Link>
 
-          <Link
-            href="/category/chal"
-            className="w-full sm:w-auto px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl text-sm transition-colors inline-flex items-center justify-center gap-2"
-          >
-            <span>বাজারের পণ্য দেখুন</span>
-          </Link>
+
         </div>
       </div>
     </div>
