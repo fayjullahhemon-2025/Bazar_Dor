@@ -10,11 +10,11 @@ function RedirectToastListener() {
   const searchParams = useSearchParams();
   const lastParamRef = useRef<string>("");
   const lastTimeRef = useRef<number>(0);
-  const socialToastShownRef = useRef<boolean>(false);
+  const authSuccessToastShownRef = useRef<boolean>(false);
   const { data: session } = useSession();
 
   useEffect(() => {
-    // 1. Check if social login just completed via sessionStorage or auth_success searchParam
+    // 1. Check if login just completed via sessionStorage or auth_success searchParam
     const hasSocialPending =
       typeof window !== "undefined" &&
       sessionStorage.getItem("social_login_pending") === "true";
@@ -28,16 +28,16 @@ function RedirectToastListener() {
         window.history.replaceState({}, "", url.pathname + (url.search ? url.search : ""));
       }
 
-      if (!socialToastShownRef.current) {
-        socialToastShownRef.current = true;
+      if (!authSuccessToastShownRef.current) {
+        authSuccessToastShownRef.current = true;
         toast.success("সফলভাবে সাইন ইন হয়েছে!", {
-          toastId: "social-auth-success",
+          toastId: "auth-success",
         });
       }
       return;
     }
 
-    socialToastShownRef.current = false;
+    authSuccessToastShownRef.current = false;
 
     // 2. Check if already logged in redirect triggered
     const isAlreadyLoggedIn =

@@ -4,24 +4,17 @@ import { useState, useEffect, useRef, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
-import { authClient, signIn, useSession } from "@/lib/auth-client";
+import { authClient, signIn } from "@/lib/auth-client";
 
 function SignInForm() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const lastToastParamRef = useRef<string>("");
     const lastToastTimeRef = useRef<number>(0);
-    const { data: session, isPending } = useSession();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        if (!isPending && session?.user) {
-            router.replace(`/?already_logged_in=true&t=${Date.now()}`);
-        }
-    }, [isPending, session, router]);
 
     useEffect(() => {
         const isRedirected =
@@ -66,10 +59,13 @@ function SignInForm() {
 
         try {
             const callbackUrl = searchParams.get("callbackUrl") || "/";
+            const separator = callbackUrl.includes("?") ? "&" : "?";
+            const finalCallbackUrl = `${callbackUrl}${separator}auth_success=true`;
+
             const { data, error } = await signIn.email({
                 email: trimmedEmail,
                 password,
-                callbackURL: callbackUrl,
+                callbackURL: finalCallbackUrl,
             });
 
             if (error) {
@@ -77,8 +73,7 @@ function SignInForm() {
                     error.message || "লগইন ব্যর্থ হয়েছে। ইমেইল বা পাসওয়ার্ড সঠিক কিনা পরীক্ষা করুন।"
                 );
             } else {
-                toast.success("সফলভাবে সাইন ইন হয়েছে!");
-                router.push(callbackUrl);
+                router.push(finalCallbackUrl);
                 router.refresh();
             }
         } catch (err: unknown) {
